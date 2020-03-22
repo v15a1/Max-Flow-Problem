@@ -6,7 +6,7 @@ import java.util.*;
 import java.lang.*;
 import java.util.LinkedList;
 
-class MaxFlow {
+public class FordFulkersonAlgorithm {
     //instance variable to hold the number of vertices
     int numberOfVertices;
 
@@ -84,7 +84,7 @@ class MaxFlow {
                 outputGraph[x][y] = graph[x][y] - residualGraph[x][y];      //adding values into the graph to display
                 residualGraph[y][x] += bottleneck;
             }
-            printFinalGraph(outputGraph);   //printing output graph
+//            printFinalGraph(outputGraph);   //printing output graph
             maxFlow += bottleneck;
         }
 
