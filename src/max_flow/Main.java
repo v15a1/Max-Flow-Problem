@@ -1,41 +1,31 @@
+//UOW ID - w1742117
+//IIT ID - 2018418
+//Name - Visal Rajapakse
 package max_flow;
 
 public class Main {
-    private static final int TO_MILLIS = 1000000;
 
     public static void main(String[] args) {
-        run6NodeGraph();
-        run12NodeGraph();
+        executeGraph(Dataset.adjacencyMatrix96x96());
+//        executeGraph(GenerateGraph.generateDataset(6, 11));
     }
 
-    public static void run6NodeGraph(){
+    public static void executeGraph(int[][] graph){
         // graph implementation by adjacency matrix with a 2 dimensional array
-        int[][] graph = Dataset.adjacencyMatrix6x6();
+        FordFulkersonAlgorithm ff = new FordFulkersonAlgorithm();
+        int arrSize = graph.length;
+        ff.setNumberOfVertices(graph.length);    //setting the number of vertices
+        int targetNode = ff.numberOfVertices - 1;      //value of the sink node
 
-        long startTime = System.nanoTime();
-        FordFulkersonAlgorithm m = new FordFulkersonAlgorithm();
-        m.setNumberOfVertices(graph.length);
-        int targetNode = m.numberOfVertices - 1;      //value of the sink node
-        System.out.println("The MAX FLOW of 6x6 is : " + m.fordFulkerson(graph, targetNode));
+        long startTime = System.nanoTime();     //start time
+        double maxFlow = ff.fordFulkerson(graph, targetNode);       //getting maximum-flow
         long endTime = System.nanoTime();
+
+        System.out.println("The MAX FLOW of "+arrSize+"x"+arrSize+" is : " + maxFlow);
         long totalDuration = (endTime - startTime);     //calculating time taken for the algorithm execution
-        System.out.println("Total duration in nano seconds for the 6x6 : " + totalDuration);
+        System.out.println("Total duration in nano seconds : " + totalDuration);
+//        ff.printFinalGraph();
+
+
     }
-
-    public static void run12NodeGraph(){
-        // graph implementation by adjacency matrix with a 2 dimensional array
-        int[][] graph = Dataset.adjacencyMatrix12x12();
-
-        long startTime = System.nanoTime();
-        FordFulkersonAlgorithm m = new FordFulkersonAlgorithm();
-        m.setNumberOfVertices(graph.length);
-        int targetNode = m.numberOfVertices - 1;      //value of the sink node
-        System.out.println("The MAX FLOW of 12x12 is : " + m.fordFulkerson(graph, targetNode));
-        long endTime = System.nanoTime();
-        long totalDuration = (endTime - startTime);     //calculating time taken for the algorithm execution
-        System.out.println("Total duration in nano seconds for the 12x12 : " + totalDuration);
-    }
-
-
-
 }

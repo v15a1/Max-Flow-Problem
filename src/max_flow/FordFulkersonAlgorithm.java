@@ -1,3 +1,7 @@
+//UOW ID - w1742117
+//IIT ID - 2018418
+//Name - Visal Rajapakse
+
 package max_flow;
 
 // Java program for implementation of Ford Fulkerson algorithm
@@ -9,7 +13,7 @@ import java.util.LinkedList;
 public class FordFulkersonAlgorithm {
     //instance variable to hold the number of vertices
     int numberOfVertices;
-
+    int[][] outputGraph;
     /*
      * method which implements the Breadth First Search to traverse the graph
      * @params residual[][] is a 2 dimensional residual graph
@@ -30,7 +34,7 @@ public class FordFulkersonAlgorithm {
 
         queue.add(source);              //adding the source node to the queue
         visited[source] = true;         //setting the source node visited to true
-        residualPath[source] = 0;
+        residualPath[source] = -1;
 
         //traversing the graph
         while (queue.size() != 0) {
@@ -55,7 +59,7 @@ public class FordFulkersonAlgorithm {
         int maxFlow = 0; //initial flow == 0
 
         //2 dimensional array which stores the final values of the graph to display
-        int[][] outputGraph = new int[numberOfVertices][numberOfVertices];
+        outputGraph = new int[numberOfVertices][numberOfVertices];
         //a 2 dimensional array which stores the residual edges of the graph
         //if the residualGraph[x][y] = 0, there is no edge between the 2 nodes that can be used to draw an augmented graph
         int[][] residualGraph = new int[numberOfVertices][numberOfVertices];
@@ -98,10 +102,10 @@ public class FordFulkersonAlgorithm {
     }
 
     //method to print final graph
-    public void printFinalGraph(int[][] graph) {
+    public void printFinalGraph() {
         System.out.println("\n");
         for (int x = 0; x < numberOfVertices; x++) {
-            System.out.println(Arrays.toString(graph[x]));
+            System.out.println(Arrays.toString(this.outputGraph[x]));
         }
     }
 
