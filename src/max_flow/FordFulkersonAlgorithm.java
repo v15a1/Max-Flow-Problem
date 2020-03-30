@@ -3,9 +3,6 @@
 //Name - Visal Rajapakse
 
 package max_flow;
-
-// Java program for implementation of Ford Fulkerson algorithm
-
 import java.util.*;
 import java.lang.*;
 import java.util.LinkedList;
@@ -47,8 +44,8 @@ public class FordFulkersonAlgorithm {
                 }
             }
         }
-        // If we reached sink in BFS starting from source, then the true is returned
-        //will return true until BFS can find an augmented path
+        // If sink is reached from source true is returned
+        //will return true until BFS can find an augmenting path
         return (visited[target]);
     }
 
@@ -75,21 +72,19 @@ public class FordFulkersonAlgorithm {
         while (breadthFirstSearch(residualGraph, 0, t, residualPath)) {
             //finding bottleneck capacity of a certain path
             int bottleneck = Integer.MAX_VALUE;
-            for (y = t; y != 0; y = residualPath[y]) {
+             for (y = t; y != 0; y = residualPath[y]) {
                 x = residualPath[y];
                 bottleneck = Math.min(bottleneck, residualGraph[x][y]);
             }
 
-            // update residual capacities of the edges and
-            // reverse edges along the path
+            // updating residual capacities each of the edges and reversing edges along the path
             for (y = t; y != 0; y = residualPath[y]) {
                 x = residualPath[y];
                 residualGraph[x][y] -= bottleneck;
                 outputGraph[x][y] = graph[x][y] - residualGraph[x][y];      //adding values into the graph to display
                 residualGraph[y][x] += bottleneck;
             }
-//            printFinalGraph(outputGraph);   //printing output graph
-            maxFlow += bottleneck;
+            maxFlow += bottleneck;  //adding bottleneck to maxflow if an augmenting path exists
         }
 
 
@@ -103,7 +98,6 @@ public class FordFulkersonAlgorithm {
 
     //method to print final graph
     public void printFinalGraph() {
-        System.out.println("\n");
         for (int x = 0; x < numberOfVertices; x++) {
             System.out.println(Arrays.toString(this.outputGraph[x]));
         }

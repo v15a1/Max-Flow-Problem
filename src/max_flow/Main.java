@@ -6,7 +6,8 @@ package max_flow;
 public class Main {
 
     public static void main(String[] args) {
-        executeGraph(Dataset.adjacencyMatrix12x12());
+        //passing datasets to execute
+        executeGraph(Dataset.adjacencyMatrix6x6());
     }
 
     public static void executeGraph(int[][] graph){
@@ -25,7 +26,8 @@ public class Main {
         System.out.println("The MAX FLOW of "+arrSize+"x"+arrSize+" is : " + maxFlow);
         long totalDuration = (endTime - startTime);     //calculating time taken for the algorithm execution
         System.out.println("Total duration in nano seconds : " + totalDuration);
-        ff.printFinalGraph();
+        System.out.println("The final graph is ...");
+        ff.printFinalGraph();//method to print the final graph
 
 
     }
